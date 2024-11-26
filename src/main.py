@@ -72,7 +72,7 @@ def fixed_update():
                         walls = level[3]
                         coins = level[4]
                         mwalls = level[5]
-                    except FileNotFoundError:
+                    except FileNotFoundError: # Either the game is complete or the levels folder is fucked. We assume the former because I don't want to deal with the latter.
                         level = load_level.load_level("assets/levels/end.json")
                         player = level[0]
                         checkpoints = level[1]
