@@ -1,0 +1,32 @@
+{
+    "spawn": {
+        "x": 400, "y": 400
+    },
+
+    "walls": [
+        {
+            "x": 0, "y": 0,
+            "bp": 15
+        }
+    ],
+
+    "mwalls": [],
+
+    "coins": [
+        {
+            "x": 800, "y": 100
+        }
+    ],
+
+    "enemies": [
+    ],
+
+    "checkpoints" : [
+        {
+            "x": 128, "y": 128,
+            "w": 192, "h": 128,
+            "start": false,
+            "finish": true
+        }
+    ]
+}
