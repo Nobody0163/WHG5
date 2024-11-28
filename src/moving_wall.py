@@ -68,6 +68,6 @@ class MovingWall:
         if self.border_pattern & _wall.BORDER_TOP:
             window.blit(_wall.HOR_BORDER_SURF, (self.x, self.y))
         if self.border_pattern & _wall.BORDER_RIGHT:
-            window.blit(_wall.VERT_BORDER_SURF, (self.x + (constants.WALL_SPRITE.get_width() - 1), self.y))
+            window.blit(_wall.VERT_BORDER_SURF, (self.x + (constants.WALL_SPRITE.get_width() - _wall.VERT_BORDER_SURF.get_width()), self.y))
         if self.border_pattern & _wall.BORDER_BOTTOM:
-            window.blit(_wall.HOR_BORDER_SURF, (self.x, self.y + (constants.WALL_SPRITE.get_height() - 1)))
+            window.blit(_wall.HOR_BORDER_SURF, (self.x, self.y + (constants.WALL_SPRITE.get_height() - _wall.HOR_BORDER_SURF.get_height())))

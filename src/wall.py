@@ -8,8 +8,8 @@ BORDER_TOP = 2
 BORDER_RIGHT = 4
 BORDER_BOTTOM = 8
 
-VERT_BORDER_SURF = pygame.Surface((2, constants.WALL_SPRITE.get_height()))
-HOR_BORDER_SURF = pygame.Surface((constants.WALL_SPRITE.get_width(), 2))
+VERT_BORDER_SURF = pygame.Surface((4, constants.WALL_SPRITE.get_height()))
+HOR_BORDER_SURF = pygame.Surface((constants.WALL_SPRITE.get_width(), 4))
 
 class Wall:
     x: float
@@ -48,6 +48,6 @@ class Wall:
         if self.border_pattern & BORDER_TOP:
             window.blit(HOR_BORDER_SURF, (self.x, self.y))
         if self.border_pattern & BORDER_RIGHT:
-            window.blit(VERT_BORDER_SURF, (self.x + (constants.WALL_SPRITE.get_width() - 1), self.y))
+            window.blit(VERT_BORDER_SURF, (self.x + (constants.WALL_SPRITE.get_width() - VERT_BORDER_SURF.get_width()), self.y))
         if self.border_pattern & BORDER_BOTTOM:
-            window.blit(HOR_BORDER_SURF, (self.x, self.y + (constants.WALL_SPRITE.get_height() - 1)))
+            window.blit(HOR_BORDER_SURF, (self.x, self.y + (constants.WALL_SPRITE.get_height() - HOR_BORDER_SURF.get_height())))
