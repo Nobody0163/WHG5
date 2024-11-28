@@ -1,5 +1,5 @@
 import pygame
-import math
+import math as meth
 
 import debug
 import background
@@ -55,7 +55,24 @@ while running:
             
             elif event.key == pygame.K_w:
                 if walls[ts_to_idx(tile_selected)] is None:
-                    walls[ts_to_idx(tile_selected)] = wall.Wall(tile_selected[0] * 32, tile_selected[1] * 32, 0)
+                    bp = 15
+                    if tile_selected[0] < 39:
+                        if walls[ts_to_idx((tile_selected[0] + 1, tile_selected[1]))] is not None:
+                            bp ^= wall.BORDER_RIGHT
+                    
+                    if tile_selected[0] > 0:
+                        if walls[ts_to_idx((tile_selected[0] - 1, tile_selected[1]))] is not None:
+                            bp ^= wall.BORDER_LEFT
+                    
+                    if tile_selected[1] > 0:
+                        if walls[ts_to_idx((tile_selected[0], tile_selected[1] - 1))] is not None:
+                            bp ^= wall.BORDER_TOP
+                    
+                    if tile_selected[1] < 22:
+                        if walls[ts_to_idx((tile_selected[0], tile_selected[1] + 1))] is not None:
+                            bp ^= wall.BORDER_BOTTOM
+
+                    walls[ts_to_idx(tile_selected)] = wall.Wall(tile_selected[0] * 32, tile_selected[1] * 32, bp)
                 else:
                     walls[ts_to_idx(tile_selected)] = None
             
@@ -94,8 +111,13 @@ while running:
                 for _coin in coins:
                     if _coin is not None:
                         _coins.append(_coin)
+                
+                _enemies = []
+                for _enemy in enemies:
+                    if _enemy is not None:
+                        _enemies.append(_enemy)
 
-                load_level.save_level(input("Path to save to: "), _player, [checkpoints[cp] for cp in checkpoints], enemies, _walls, _coins, mwalls)
+                load_level.save_level(input("Path to save to: "), _player, [checkpoints[cp] for cp in checkpoints], _enemies, _walls, _coins, mwalls)
             
             elif event.key == pygame.K_e:
                 if enemies[ts_to_idx(tile_selected)] is None:
@@ -104,16 +126,16 @@ while running:
                     enemies[ts_to_idx(tile_selected)] = None
 
     mpos = pygame.mouse.get_pos()
-    tile_selected = (math.floor(mpos[0] / 32), math.floor(mpos[1] / 32))
+    tile_selected = (meth.floor(mpos[0] / 32), meth.floor(mpos[1] / 32))
 
     background.render_background(window)
+    
+    for cp in checkpoints:
+        checkpoints[cp].render(window)
 
     for _wall in walls:
         if _wall is not None:
             _wall.render(window)
-    
-    for cp in checkpoints:
-        checkpoints[cp].render(window)
 
     _player.update(window, 0)
 
